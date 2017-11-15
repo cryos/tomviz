@@ -424,8 +424,18 @@ set_target_properties(tomvizlib PROPERTIES OUTPUT_NAME tomviz)
 
 set_property(TARGET tomvizlib PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 
+if(TOMVIZ_ENABLE_RPC)
+  list(APPEND exec_sources RpcListener.cxx)
+  find_package(MoleQueue REQUIRED NO_MODULE)
+  include_directories(${MoleQueue_INCLUDE_DIRS})
+  add_definitions("-DTOMVIZ_ENABLE_RPC")
+endif()
+
 add_executable(tomviz WIN32 MACOSX_BUNDLE ${exec_sources} resources.qrc)
 target_link_libraries(tomviz PRIVATE tomvizlib ${OPENGL_LIBRARIES})
+if(TOMVIZ_ENABLE_RPC)
+  target_link_libraries(tomviz PRIVATE MoleQueueServerCore MoleQueueClient)
+endif()
 
 target_link_libraries(tomvizlib
   PUBLIC

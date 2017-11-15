@@ -29,6 +29,10 @@
 #include "tomvizConfig.h"
 #include "tomvizPythonConfig.h"
 
+#if defined(TOMVIZ_ENABLE_RPC)
+#include "RpcListener.h"
+#endif
+
 #include <clocale>
 
 int main(int argc, char** argv)
@@ -60,5 +64,11 @@ int main(int argc, char** argv)
   pqPVApplicationCore appCore(argc, argv);
   tomviz::MainWindow window;
   window.show();
+
+#if defined(TOMVIZ_ENABLE_RPC)
+  tomviz::RpcListener listener;
+  listener.start();
+#endif
+
   return app.exec();
 }

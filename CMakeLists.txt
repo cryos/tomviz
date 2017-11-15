@@ -118,6 +118,8 @@ if(ITK_FOUND AND NOT SKIP_PARAVIEW_ITK_PYTHON_CHECKS)
   endif()
 endif()
 
+option(TOMVIZ_ENABLE_RPC "Enable RPC server" OFF)
+
 add_subdirectory(tomviz)
 
 option(ENABLE_TESTING "Enable testing and building the tests." OFF)
