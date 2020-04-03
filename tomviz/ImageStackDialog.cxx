@@ -17,10 +17,6 @@
 #include <chrono>
 #include <thread>
 
-#include <vtkImageData.h>
-#include <vtkNew.h>
-#include <vtkTIFFReader.h>
-
 extern "C" {
 #include "vtk_tiff.h"
 }
